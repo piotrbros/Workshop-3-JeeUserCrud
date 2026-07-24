@@ -8,11 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/test_backup")
+@WebServlet("/user/list_test")
 public class test_backup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/index_backup.jsp").forward(request, response);
+        request.getRequestDispatcher("/users/list_test.jsp").forward(request, response);
     }
 
     @Override
