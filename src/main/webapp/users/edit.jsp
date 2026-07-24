@@ -20,30 +20,30 @@
     <div class="container mt-4">
           <div class="card shadow-sm">
             <div class="card-header">
-              <h4 class="mb-0 fw-bold">Dodaj użytkownika</h4>
+              <h4 class="mb-0 fw-bold">Edycja użytkownika</h4>
             </div>
 
             <div class="card-body">
-              <form action="/user/add" method="post">
+              <form action="/user/edit" method="post">
                 <div class="mb-3">
                   <label for="userName" class="form-label">Nazwa użytkownika</label>
                   <input
+                          value="${currentUser.userName}"
                           type="text"
                           id="userName"
                           name="userName"
                           class="form-control"
-                          placeholder="Nazwa użytkownika"
                           required>
                 </div>
 
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input
+                          value="${currentUser.email}"
                           type="email"
                           id="email"
                           name="email"
                           class="form-control"
-                          placeholder="Adres email"
                           required>
                 </div>
 
@@ -56,6 +56,12 @@
                           class="form-control"
                           placeholder="Hasło"
                           required>
+
+                  <input
+                          value="${currentUser.id}"
+                          type="hidden"
+                          name="id">
+
                 </div>
                 <button type="submit" class="btn btn-primary">
                   Zapisz

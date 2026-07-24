@@ -20,21 +20,11 @@
     <div class="container mt-4">
           <div class="card shadow-sm">
             <div class="card-header">
-              <h4 class="mb-0 fw-bold">Dodaj użytkownika</h4>
+              <h4 class="mb-0 fw-bold">Zaloguj się do panelu administratora.</h4>
             </div>
 
             <div class="card-body">
-              <form action="/user/add" method="post">
-                <div class="mb-3">
-                  <label for="userName" class="form-label">Nazwa użytkownika</label>
-                  <input
-                          type="text"
-                          id="userName"
-                          name="userName"
-                          class="form-control"
-                          placeholder="Nazwa użytkownika"
-                          required>
-                </div>
+              <form action="/login" method="post">
 
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>

@@ -53,7 +53,7 @@
                     <td>
                       <a href="/user/delete?id=${user.id}">Usuń</a>
                       <a href="/user/edit?id=${user.id}">Edytuj</a>
-                      <a href="/user/view?id=${user.id}">Pokaż</a>
+                      <a href="/user/show?id=${user.id}">Pokaż</a>
                     </td>
                   </tr>
                 </c:forEach>

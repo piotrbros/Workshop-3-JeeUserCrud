@@ -64,7 +64,7 @@ public class UserDao {
     public User read(String email) throws SQLException {
         try(Connection conn = DbUtil.getConnection()) {
             PreparedStatement prepStmt =
-                    conn.prepareStatement(READ_USER_BY_ID_QUERY);
+                    conn.prepareStatement(READ_USER_BY_EMAIL_QUERY);
             prepStmt.setString(1, email);
             ResultSet resultSet = prepStmt.executeQuery();
             if (resultSet.next()) {

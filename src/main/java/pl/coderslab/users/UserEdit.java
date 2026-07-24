@@ -18,7 +18,17 @@ public class UserEdit extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/users/add.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        User currentUser;
+        try {
+            currentUser =  userDao.read(id);
+        } catch (SQLException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "SQL error");
+            return;
+        }
+        request.setAttribute("currentUser", currentUser);
+        getServletContext().getRequestDispatcher("/users/edit.jsp").forward(request, response);
     }
 
     @Override
@@ -26,23 +36,33 @@ public class UserEdit extends HttpServlet {
         String userName = request.getParameter("userName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String stringId = request.getParameter("id");
 
         if (userName == null || userName.isBlank()
                 || email == null || email.isBlank()
-                || password == null || password.isBlank()) {
+                || password == null || password.isBlank()
+                || stringId == null || stringId.isBlank()) {
 
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Wszystkie pola są wymagane");
             return;
         }
-
-        User newUser = new User(email, userName, password);
+        int id;
+        try {
+            id = Integer.parseInt(stringId);
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "Error when parsing id");
+            return;
+        }
+        User currentUser = new User(id, email, userName, password);
 
         try {
-            userDao.create(newUser);
+            userDao.update(currentUser);
             response.sendRedirect("/user/list");
         } catch (SQLException e) {
-            response.getWriter().append("ERROR CREATING NEW USER");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "Error when doing SQL update for current user.");
         }
     }
 }
